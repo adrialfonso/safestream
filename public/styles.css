@@ -1,0 +1,54 @@
+body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+#video-container {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+video {
+    width: 50%;
+    margin: 10px 0;
+}
+
+.remote-video {
+    max-width: 100%;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+#chat-container {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    padding: 10px;
+    border-left: 1px solid #ccc;
+}
+
+#start-btn, #send-btn {
+    padding: 10px;
+    margin: 10px 0;
+}
+
+#chat {
+    flex-grow: 1;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: scroll;
+}
+
+#message {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+}

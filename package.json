@@ -1,0 +1,17 @@
+{
+  "name": "safestream",
+  "version": "1.0.0",
+  "description": "A secure, decentralized chat using WebRTC with end-to-end encryption for private communication, no intermediaries.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "adrialfonso",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  }
+}
