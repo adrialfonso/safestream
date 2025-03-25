@@ -19,6 +19,8 @@ body {
     background: #ffffff;
     border-radius: 8px;
     padding: 10px;
+    position: relative;
+    overflow: hidden;
 }
 
 #remoteVideos {
@@ -51,14 +53,19 @@ body {
     position: absolute;
     bottom: 10px;
     right: 10px;
-    width: 20%;
-    min-width: 160px;
-    max-width: 240px;
+    width: 15%; 
+    min-width: 120px;
+    max-width: 200px;
     border: 1px solid #000000;
-    border-radius: 8px;
-    z-index: 2;
     border-radius: 12px;
+    z-index: 2;
     object-fit: contain;
+    transition: transform 0.3s ease, width 0.3s ease; 
+    transform-origin: bottom right;
+}
+
+#localVideo:hover {
+    transform: scale(1.5);
 }
 
 #chat-container {
