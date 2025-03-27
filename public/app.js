@@ -5,8 +5,8 @@ const remoteVideos = document.getElementById('remoteVideos');
 const chat = document.getElementById('chat');
 const messageInput = document.getElementById('message');
 
-// const socket = io.connect('http://localhost:8765');
-const socket = io.connect('https://safestream.onrender.com');
+const socket = io.connect('http://localhost:8765');
+// const socket = io.connect('https://safestream.onrender.com');
 
 let localStream;
 const peerConnections = {};
@@ -60,13 +60,13 @@ function createPeerConnection(socketId) {
     dataChannels[socketId] = dataChannel;
 
     dataChannel.onopen = () => {
-        console.log('A new peer-to-peer RTCDataChannel is open');
+        console.log(`RTCDataChannel is now open with ${socketId}`);
     };
 
     // Handle data channel message event
     dataChannel.onmessage = event => {
         const message = document.createElement('p');
-        message.textContent = `${socketId}: ${event.data}`;
+        message.textContent = `${socketId} > ${event.data}`;
         chat.appendChild(message);
     };
 
@@ -142,7 +142,7 @@ startBtn.addEventListener('click', startVideo);
 // Send message on button click
 sendBtn.addEventListener('click', () => {
     const message = messageInput.value;
-    const fullMessage = `${socket.id}: ${message}`;
+    const fullMessage = `${socket.id} > ${message}`;
     // Send the message through all data channels (mesh network)
     Object.values(dataChannels).forEach(channel => channel.send(fullMessage));
     const messageElement = document.createElement('p');
