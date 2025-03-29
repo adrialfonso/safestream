@@ -12,14 +12,15 @@
 
 #chat-container {
     width: fit-content;
-    min-width: 300px;
+    max-width: 350px;
 }
 
 #localVideo {
-    width: 300px;
-    min-width: 250px;
-    max-width: 400px;
+    width: 350px;
     object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 #chat p {
