@@ -9,6 +9,7 @@ const socket = io.connect('http://localhost:8765');
 // const socket = io.connect('https://safestream.onrender.com');
 
 let localStream;
+let roomId;
 const peerConnections = {};
 const dataChannels = {};
 const config = {
@@ -18,6 +19,14 @@ const config = {
     ]
 };
 
+// Extract room ID from URL
+const pathSegments = window.location.pathname.split('/').filter(segment => segment);
+roomId = pathSegments[0] || crypto.randomUUID();
+if (!pathSegments.length) {
+  window.history.replaceState(null, null, `/${roomId}`);
+}
+document.getElementById('room-id').textContent = `Room ID: ${roomId}`;
+
 // Function to start video streaming
 async function startVideo() {
     // Get user media (video and audio)
@@ -25,7 +34,7 @@ async function startVideo() {
     localVideo.srcObject = localStream;
     localVideo.style.display = "block";
     // Emit a join event to the server
-    socket.emit('join', 'room1');
+    socket.emit('join', roomId);
 }
 
 // Function to create a new peer-to-peer connection
