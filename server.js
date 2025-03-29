@@ -30,6 +30,11 @@ io.on('connection', (socket) => {
   socket.on('join', (room) => {
     currentRoom = room;
     socket.join(room);
+
+    // Send online peers in the room to the new peer
+    const peersInRoom = [...io.sockets.adapter.rooms.get(room) || []].filter(id => id !== socket.id);
+    socket.emit('online-room-peers', peersInRoom);
+
     // Broadcast new peer connection to all peers in the same room
     socket.to(room).emit('new-peer', socket.id);
   });

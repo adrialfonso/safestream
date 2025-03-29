@@ -92,6 +92,20 @@ function createPeerConnection(socketId) {
     return peerConnection;
 }
 
+// Show online peers in the room when joining the room
+socket.on('online-room-peers', (peers) => {
+    let message;
+    if (peers.length === 0) {
+        message = `You joined the room. No peers online.`;
+    } else {
+        message = `You joined the room. Peers in room: ${peers.join(', ')}`;
+    }
+
+    const messageElement = document.createElement('p');
+    messageElement.textContent = message;
+    chat.appendChild(messageElement);
+});
+
 // Handle new peer connection
 socket.on('new-peer', async (socketId) => {
     const peerConnection = createPeerConnection(socketId);
@@ -106,7 +120,6 @@ socket.on('new-peer', async (socketId) => {
     const messageElement = document.createElement('p');
     messageElement.textContent = message;
     chat.appendChild(messageElement);
-    messageInput.value = '';
 });
 
 // Handle peer disconnection
@@ -131,7 +144,6 @@ socket.on('peer-disconnected', (socketId) => {
     const messageElement = document.createElement('p');
     messageElement.textContent = message;
     chat.appendChild(messageElement);
-    messageInput.value = '';
 });
 
 // Handle receiving an offer
