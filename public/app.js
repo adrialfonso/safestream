@@ -5,8 +5,8 @@ const remoteVideos = document.getElementById('remoteVideos');
 const chat = document.getElementById('chat');
 const messageInput = document.getElementById('message');
 
-const socket = io.connect('http://localhost:8765');
-// const socket = io.connect('https://safestream.onrender.com');
+// const socket = io.connect('http://localhost:8765');
+const socket = io.connect('https://safestream.onrender.com');
 
 let localStream;
 let roomId;
