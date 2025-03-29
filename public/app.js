@@ -101,6 +101,12 @@ socket.on('new-peer', async (socketId) => {
     const offer = await peerConnection.createOffer();
     await peerConnection.setLocalDescription(offer);
     socket.emit('offer', { to: socketId, offer });
+
+    const message = `${socket.id} joined the room`;
+    const messageElement = document.createElement('p');
+    messageElement.textContent = message;
+    chat.appendChild(messageElement);
+    messageInput.value = '';
 });
 
 // Handle peer disconnection
@@ -120,6 +126,12 @@ socket.on('peer-disconnected', (socketId) => {
         dataChannels[socketId].close();
         delete dataChannels[socketId];
     }
+
+    const message = `${socket.id} left the room`;
+    const messageElement = document.createElement('p');
+    messageElement.textContent = message;
+    chat.appendChild(messageElement);
+    messageInput.value = '';
 });
 
 // Handle receiving an offer
