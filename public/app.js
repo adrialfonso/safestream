@@ -5,8 +5,8 @@ const remoteVideos = document.getElementById('remoteVideos');
 const chat = document.getElementById('chat');
 const messageInput = document.getElementById('message');
 
-// const socket = io.connect('http://localhost:8765');
-const socket = io.connect('https://safestream.onrender.com');
+const socket = io.connect('http://localhost:8765');
+// const socket = io.connect('https://safestream.onrender.com');
 
 let localStream;
 let roomId;
@@ -76,6 +76,8 @@ function createPeerConnection(socketId) {
     dataChannel.onmessage = event => {
         const message = document.createElement('p');
         message.textContent = `${socketId} > ${event.data}`;
+        message.style.color = '#0000FF';
+        message.style.fontWeight = 'bold';
         chat.appendChild(message);
     };
 
@@ -85,6 +87,8 @@ function createPeerConnection(socketId) {
         receiveChannel.onmessage = event => {
             const message = document.createElement('p');
             message.textContent = `${event.data}`;
+            message.style.color = '#0000FF';
+            message.style.fontWeight = 'bold';
             chat.appendChild(message);
         };
     };
@@ -96,13 +100,13 @@ function createPeerConnection(socketId) {
 socket.on('online-room-peers', (peers) => {
     let message;
     if (peers.length === 0) {
-        message = `You joined the room. No peers online.`;
+        message = `<em>You joined the room. No peers online.</em>`;
     } else {
-        message = `You joined the room. Peers in room: ${peers.join(', ')}`;
+        message = `<em>You joined the room. Peers in room: ${peers.join(', ')}</em>`;
     }
 
     const messageElement = document.createElement('p');
-    messageElement.textContent = message;
+    messageElement.innerHTML = message;
     chat.appendChild(messageElement);
 });
 
@@ -116,9 +120,9 @@ socket.on('new-peer', async (socketId) => {
     await peerConnection.setLocalDescription(offer);
     socket.emit('offer', { to: socketId, offer });
 
-    const message = `${socket.id} joined the room`;
+    const message = `<em>${socketId} joined the room</em>`;
     const messageElement = document.createElement('p');
-    messageElement.textContent = message;
+    messageElement.innerHTML = message;
     chat.appendChild(messageElement);
 });
 
@@ -140,9 +144,9 @@ socket.on('peer-disconnected', (socketId) => {
         delete dataChannels[socketId];
     }
 
-    const message = `${socket.id} left the room`;
+    const message = `<em>${socketId} left the room</em>`;
     const messageElement = document.createElement('p');
-    messageElement.textContent = message;
+    messageElement.innerHTML = message;
     chat.appendChild(messageElement);
 });
 
