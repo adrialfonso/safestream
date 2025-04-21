@@ -5,8 +5,8 @@ const remoteVideos = document.getElementById('remoteVideos');
 const chat = document.getElementById('chat');
 const messageInput = document.getElementById('message');
 
-// const socket = io.connect('http://localhost:8765');
-const socket = io.connect('https://safestream.onrender.com');
+const socket = io.connect('http://localhost:8765');
+// const socket = io.connect('https://safestream.onrender.com');
 
 let localStream;
 let roomId;
@@ -39,7 +39,7 @@ async function startVideo() {
 
 // Function to create a new peer-to-peer connection
 function createPeerConnection(socketId) {
-    const peerConnection = new RTCPeerConnection(config);
+    const peerConnection = new RTCPeerConnection(config);    
     // Add local stream tracks to the peer connection
     localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
 

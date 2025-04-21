@@ -74,6 +74,6 @@ io.on('connection', (socket) => {
 const PORT = process.env.PORT || 8765; 
 // const PORT = 8765;
 server.listen(PORT, () => {
-  // console.log(`Signaling server running on port http://localhost:${PORT}`);
-  console.log(`Signaling server running on port ${PORT}`);
+  console.log(`Signaling server running on port http://localhost:${PORT}`);
+  // console.log(`Signaling server running on port ${PORT}`);
 });
